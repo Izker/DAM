@@ -1,6 +1,8 @@
 package ConnectDB;
 
 import java.io.File;
+import MappingORM.*;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
