@@ -9,24 +9,16 @@ public class Session {
 		this.con = con;
 	}
 	
-//	public Session getSession(){
-//	
-//	}
-	
 	public Connection getConnection(){ 
 		return this.con;
 	}
 	
-	public void closeSession(){ 
-		
+	public void closeSession() throws SQLException{ 
+		con.close();
 	}
 	
 	public void executeQuery(){
 		
-	}
-	
-	public boolean PropertyMapping(Mapping m, Object o){
-		return m.checkMapping(o);
 	}
 	
 }

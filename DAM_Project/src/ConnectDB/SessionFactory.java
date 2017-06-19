@@ -5,6 +5,6 @@ public abstract class SessionFactory {
 	protected String connectString;
 	protected Connection con;
 	
-	public abstract Connection createConnection() throws SQLException;
+	protected abstract Connection createConnection() throws SQLException;
 	public abstract Session createSession() ;		
 }
