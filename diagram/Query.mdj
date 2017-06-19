@@ -6040,8 +6040,8 @@
 							"showShadow": true,
 							"containerChangeable": false,
 							"containerExtending": false,
-							"left": 584,
-							"top": 440,
+							"left": 640,
+							"top": 448,
 							"width": 168,
 							"height": 128,
 							"autoResize": false,
@@ -6070,7 +6070,7 @@
 								"$ref": "AAAAAAFcsFK6q1R0RKc="
 							},
 							"lineStyle": 1,
-							"points": "529:498;583:500"
+							"points": "529:500;639:506"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -6094,7 +6094,7 @@
 								"$ref": "AAAAAAFcuqbsw9MZ3x8="
 							},
 							"lineStyle": 1,
-							"points": "752:496;863:488"
+							"points": "808:500;863:493"
 						}
 					]
 				},
