@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 public class MySQL extends SessionFactory {
 	private Configuration config;
-	
+	protected static MySQL curinstance;
+
 	public MySQL(String path) throws SQLException{
 		this.config = new Configuration();
 		this.connectString = config.getconString();
@@ -21,10 +22,17 @@ public class MySQL extends SessionFactory {
 	}
 
 	@Override
-	public Connection createConnection() throws SQLException {
+	protected Connection createConnection() throws SQLException {
 		// TODO Auto-generated method stub
 		String connectionURL = config.getconString();
 		Connection conn = DriverManager.getConnection(connectionURL);
 		return conn;
+	}
+	
+	public static MySQL Instance(String path) throws SQLException {
+		if(curinstance == null){
+			curinstance = new MySQL(path);
+		}
+		return curinstance;
 	}
 }
