@@ -4,11 +4,17 @@ import java.lang.reflect.*;
 import java.lang.annotation.*;
 import Annotation.*;
 import ConnectDB.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 
 public class Mapping {
+
+	public boolean checkPrimaryKye(Object o, Session s) throws SQLException {
+		Connection conn = s.getConnection();
+
+		return true;
+	}
+
 	public boolean checkMapping(Object o, Session s) throws SQLException {
 		// Create connection
 		Connection conn = s.getConnection();
@@ -35,15 +41,46 @@ public class Mapping {
 				columnNames.add(columnName);
 			}
 		}
+		String primaryKey = null;
+		// Get info primarykey from user
+		for (int i = 0; i < fields.length; i++) {
+			Annotation idAnnotation = fields[i].getDeclaredAnnotation(Id.class);
+			if (idAnnotation != null) {
+				String columnName = fields[i].getName();
+				if (idAnnotation instanceof Id) {
+					Id idanno = (Id) idAnnotation;
+					primaryKey = idanno.id();
+				}
+			}
+		}
 
-		// Get info about column name and type from database
+		// Get info about column name and type from database and check
+		// Get primarykey
+		DatabaseMetaData databaseMetaData = conn.getMetaData();
+
+		String catalog = null;
+		String schema = null;
+		String primaryColumnName = null;
+
+		ResultSet result = databaseMetaData.getPrimaryKeys(catalog, schema, tablename);
+
+		while (result.next()) {
+			primaryColumnName = result.getString(4);
+		}
+
+		// Check mapping
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT TOP 1 * FROM " + tablename);
 		if (rs == null) {
 			return false;
 		} else {
+			// Get column name from database
 			ResultSetMetaData rsmd = rs.getMetaData();
-			ArrayList<String> columnNamesDB = new ArrayList<>();
+			ArrayList<String> columnNamesDB = new ArrayList<>(); // columnNamesDB
+																	// contain
+																	// column
+																	// name in
+																	// table
 
 			int n = rsmd.getColumnCount();
 			for (int i = 1; i <= n; i++) {
@@ -53,9 +90,15 @@ public class Mapping {
 			if (fields.length != n) {
 				return false;
 			} else {
-				for (int i = 0; i < fields.length; i++) {
-					if (columnNames.get(i) != columnNamesDB.get(i)) {
-						return false;
+				//check primarykey
+				if (primaryKey != primaryColumnName) {
+					return false;
+				} else {
+					//check column name of class and table
+					for (int i = 0; i < fields.length; i++) {
+						if (columnNames.get(i) != columnNamesDB.get(i)) {
+							return false;
+						}
 					}
 				}
 				return true;
