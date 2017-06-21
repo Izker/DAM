@@ -16,9 +16,4 @@ public class Session {
 	public void closeSession() throws SQLException{ 
 		con.close();
 	}
-	
-	public void executeQuery(){
-		
-	}
-	
 }

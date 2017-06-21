@@ -44,12 +44,12 @@ public class Mapping {
 		String primaryKey = null;
 		// Get info primarykey from user
 		for (int i = 0; i < fields.length; i++) {
-			Annotation idAnnotation = fields[i].getDeclaredAnnotation(Id.class);
-			if (idAnnotation != null) {
+			Annotation pkeyAnnotation = fields[i].getDeclaredAnnotation(Primarykey.class);
+			if (pkeyAnnotation != null) {
 				String columnName = fields[i].getName();
-				if (idAnnotation instanceof Id) {
-					Id idanno = (Id) idAnnotation;
-					primaryKey = idanno.id();
+				if (pkeyAnnotation instanceof Primarykey) {
+					Primarykey pkeyanno = (Primarykey) pkeyAnnotation;
+					primaryKey = pkeyanno.primarykey();
 				}
 			}
 		}
@@ -90,11 +90,11 @@ public class Mapping {
 			if (fields.length != n) {
 				return false;
 			} else {
-				//check primarykey
+				// check primarykey
 				if (primaryKey != primaryColumnName) {
 					return false;
 				} else {
-					//check column name of class and table
+					// check column name of class and table
 					for (int i = 0; i < fields.length; i++) {
 						if (columnNames.get(i) != columnNamesDB.get(i)) {
 							return false;
