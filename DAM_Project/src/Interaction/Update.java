@@ -1,5 +1,6 @@
 package Interaction;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ public class Update extends QueryTemplate{
 	Object ob2;
 	
 	@Override
-	public String doTranslate() {
+	public String doTranslate(Connection conn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
