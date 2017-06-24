@@ -30,8 +30,8 @@ public class Insert extends QueryTemplate {
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException {
 		// TODO Auto-generated method stub
 		String resString = "resString = insert into ";
-		Class<?> deptclazz = this.o.getClass();
-		Field[] fields = deptclazz.getDeclaredFields();
+		Class<?> clazz = this.o.getClass();
+		Field[] fields = clazz.getDeclaredFields();
 
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT TOP 2 * FROM DEPARTMENT");
@@ -42,11 +42,11 @@ public class Insert extends QueryTemplate {
 			columnNamesDB.add(rsmd.getColumnName(i));
 		}
 
-		Annotation tableAnnotation = deptclazz.getAnnotation(Table.class);
+		Annotation tableAnnotation = clazz.getAnnotation(Table.class);
 		String tablename = ((Table) tableAnnotation).name();
 		resString += tablename + "values (";
 
-		PropertyDescriptor[] objDescriptors = PropertyUtils.getPropertyDescriptors(deptclazz);
+		PropertyDescriptor[] objDescriptors = PropertyUtils.getPropertyDescriptors(clazz);
 		int i = 1;
 		for (String columnName : columnNamesDB) {
 			for (PropertyDescriptor objDes : objDescriptors) {

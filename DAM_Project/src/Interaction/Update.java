@@ -12,6 +12,8 @@ public class Update extends QueryTemplate{
 	@Override
 	public String doTranslate(Connection conn) {
 		// TODO Auto-generated method stub
+		Delete d = new Delete(this.ob1);
+		
 		return null;
 	}
 
