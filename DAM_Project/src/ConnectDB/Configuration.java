@@ -11,7 +11,7 @@ public class Configuration {
 	private String conString;
 	
 	//D:\workspace2\DAM_Project\src\Config.xml
-	public String readDBConfig(String path) {
+	protected String readDBConfig(String path) {
 		// TODO Auto-generated method stub
 		Document document = null;
 		File file = new File(path);
@@ -22,7 +22,6 @@ public class Configuration {
 			documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			document = documentBuilder.parse(file);
 			conString = document.getElementsByTagName("conString").item(0).getTextContent();
-			//System.out.println(test);
 			return conString;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,7 +29,8 @@ public class Configuration {
 		}
 	}
 	
-	public String getconString(){
+	public String getconString(String path){
+		this.conString = readDBConfig(path);
 		return this.conString;
 	}
 	
