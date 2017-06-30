@@ -12,12 +12,17 @@ import java.util.ArrayList;
 import org.apache.commons.beanutils.PropertyUtils;
 import Annotation.*;
 
-public class Update extends QueryTemplate{
+public class Update extends QueryTemplate {
 
-	Object o;
-	
+	private Object o;
+
+	public Update(Object o) {
+		this.o = o;
+	}
+
 	@Override
-	public String doTranslate(Connection conn) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public String doTranslate(Connection conn)
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		// TODO Auto-generated method stub
 		String resString = "UPDATE ";
 		Class<?> clazz = this.o.getClass();
@@ -27,28 +32,54 @@ public class Update extends QueryTemplate{
 		resString += tableName + " SET ";
 		Field[] fields = clazz.getDeclaredFields();
 		String pkey = "";
+
+		int numberOfField = fields.length;
+		int t = 0;
 		for (Field f : fields) {
-			Annotation[] annols = f.getAnnotations();
+			if (t != numberOfField - 1) {
+				Annotation[] annols = f.getAnnotations();
+				for (Annotation a : annols) {
+					if (a instanceof Primarykey) {
+						pkey = ((Primarykey) a).primarykey();
+					}
 
-			for (Annotation a : annols) {
-				if (a instanceof Primarykey) {
-					pkey = ((Primarykey) a).primarykey();
+					if (a instanceof Column) {
+						String propName = ((Column) a).name();
+						Object propType = PropertyUtils.getPropertyType(this.o, propName);
+						Object propValue = PropertyUtils.getProperty(this.o, propName);
+
+						if ((propType.toString().equals(Date.class.toString()) == true)
+								|| (propType.toString().equals(String.class.toString()) == true)
+								|| (propType.toString().equals(Timestamp.class.toString()) == true)) {
+							resString += propName + " = '" + propValue + "', ";
+						} else {
+							resString += propName + " = " + propValue + ", ";
+						}
+					}
 				}
+			} else {
+				Annotation[] annols = f.getAnnotations();
+				for (Annotation a : annols) {
+					if (a instanceof Primarykey) {
+						pkey = ((Primarykey) a).primarykey();
+					}
 
-				if (a instanceof Column) {
-					String propName = ((Column) a).name();
-					Object propType = PropertyUtils.getPropertyType(this.o, propName);
-					Object propValue = PropertyUtils.getProperty(this.o, propName);
+					if (a instanceof Column) {
+						String propName = ((Column) a).name();
+						Object propType = PropertyUtils.getPropertyType(this.o, propName);
+						Object propValue = PropertyUtils.getProperty(this.o, propName);
 
-					if ((propType.toString().equals(Date.class.toString()) == true)
-							|| (propType.toString().equals(String.class.toString()) == true)
-							|| (propType.toString().equals(Timestamp.class.toString()) == true)) {
-						resString += propName + " = '" + propValue + "' ";
-					} else {
-						resString += propName + " = " + propValue + " ";
+						if ((propType.toString().equals(Date.class.toString()) == true)
+								|| (propType.toString().equals(String.class.toString()) == true)
+								|| (propType.toString().equals(Timestamp.class.toString()) == true)) {
+							resString += propName + " = '" + propValue + "' ";
+						} else {
+							resString += propName + " = " + propValue + " ";
+						}
 					}
 				}
 			}
+			t++;
 		}
 
 		resString += "WHERE ";

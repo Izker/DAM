@@ -29,7 +29,7 @@ public class Insert extends QueryTemplate {
 	public String doTranslate(Connection conn)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException {
 		// TODO Auto-generated method stub
-		String resString = "resString = insert into ";
+		String resString = "insert into ";
 		Class<?> clazz = this.o.getClass();
 		Field[] fields = clazz.getDeclaredFields();
 
@@ -44,7 +44,7 @@ public class Insert extends QueryTemplate {
 
 		Annotation tableAnnotation = clazz.getAnnotation(Table.class);
 		String tablename = ((Table) tableAnnotation).name();
-		resString += tablename + "values (";
+		resString += tablename + " values (";
 
 		PropertyDescriptor[] objDescriptors = PropertyUtils.getPropertyDescriptors(clazz);
 		int i = 1;
@@ -72,13 +72,13 @@ public class Insert extends QueryTemplate {
 					} else {
 						if (propertyName.equals("class") == false) {
 							if (propType.toString().equals(String.class.toString()) == true) {
-								resString += "'" + propValue + "',)";
+								resString += "'" + propValue + "')";
 							} else {
 								if (propType.toString().equals(Date.class.toString()) == true
 										|| propType.toString().equals(Time.class.toString()) == true) {
-									resString += "'" + propValue + "',)";
+									resString += "'" + propValue + "')";
 								} else {
-									resString += propValue + ",)";
+									resString += propValue + ")";
 								}
 							}
 						}
@@ -94,7 +94,7 @@ public class Insert extends QueryTemplate {
 	@Override
 	public ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz) {
 		// TODO Auto-generated method stub
-
+		System.out.println("Insert successfully");
 		return null;
 	}
 

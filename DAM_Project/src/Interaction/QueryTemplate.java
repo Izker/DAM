@@ -11,23 +11,30 @@ import java.util.ArrayList;
 
 public abstract class QueryTemplate {
 
-	public boolean executeQuery(Session s, Class<?> clazz, ArrayList<Class<?>> resList) throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public boolean executeQuery(Session s, Class<?> clazz, ArrayList<Class<?>> resList)
+			throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		Connection conn = s.getConnection();
-		String queryString = doTranslate(conn);
-
+		String queryString = this.doTranslate(conn);
+		System.out.println(queryString);
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(queryString);
+		ResultSet rs = null;
+		// rs = stmt.executeQuery(queryString);
+		boolean res = stmt.execute(queryString);
+		rs = stmt.getResultSet();
+		if (rs != null) {
 
-		if (rs == null) {
-			return false;
-		} else {
 			resList = mappingData(rs, clazz);
+		}
+
+		if (res == true) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
 	public abstract String doTranslate(Connection conn)
-			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException ;
+			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException;
 
 	public abstract ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz);
 

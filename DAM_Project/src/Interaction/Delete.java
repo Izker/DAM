@@ -45,9 +45,9 @@ public class Delete extends QueryTemplate {
 		if ((propType.toString().equals(Date.class.toString()) == true)
 				|| (propType.toString().equals(String.class.toString()) == true)
 				|| (propType.toString().equals(Timestamp.class.toString()) == true)) {
-			resString += primarykey + " = '" + propValue + "'";
+			resString += " = '" + propValue + "'";
 		} else {
-			resString += primarykey + " = " + propValue;
+			resString += " = " + propValue;
 		}
 
 		return resString;
