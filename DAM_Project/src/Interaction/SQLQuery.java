@@ -11,6 +11,7 @@ import ConnectDB.*;
 //import java.lang.annotation.*;
 //import java.lang.reflect.*;
 import Helpers.ProcessParams;
+import querytemplate.SQLQuery;
 
 public class SQLQuery extends QueryTemplate {
 
@@ -169,6 +170,30 @@ public class SQLQuery extends QueryTemplate {
 	public SQLQuery Where(String _sql, Object... args) {
 		_sql = "WHERE " + _sql;
 		return this.append(new SQLQuery(_sql, args));
+	}
+	
+	public SQLQuery OrderBy(Object... columns){
+		String _sql = "ORDER BY ";
+		for (Object c : columns) {
+			_sql += c.toString();
+			_sql += " ,";
+		}
+		if (_sql.length() > 9) {
+			_sql = _sql.substring(0, _sql.length() - 2);
+		}
+		return this.append(new SQLQuery(_sql, null));
+	}
+	
+	public SQLQuery GroupBy(Object... columns){
+		String _sql = "GROUP BY ";
+		for (Object c : columns) {
+			_sql += c.toString();
+			_sql += " ,";
+		}
+		if (_sql.length() > 9) {
+			_sql = _sql.substring(0, _sql.length() - 2);
+		}
+		return this.append(new SQLQuery(_sql, null));
 	}
 
 	@Override
