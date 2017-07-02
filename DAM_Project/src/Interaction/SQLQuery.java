@@ -19,7 +19,7 @@ public class SQLQuery extends QueryTemplate {
 	private ArrayList<Object> args = new ArrayList<Object>();
 	private ArrayList<Object> argsFinal = new ArrayList<Object>();
 	private SQLQuery rhs = null;
-	
+
 	@Override
 	public ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz) {
 		// TODO Auto-generated method stub
@@ -62,8 +62,7 @@ public class SQLQuery extends QueryTemplate {
 		if (_args != null) {
 			for (Object obj : _args) {
 				this.args.add(obj);
-			}
-			System.out.println("ArrayList: " + this.args);
+			}			
 		}
 	}
 
@@ -105,7 +104,7 @@ public class SQLQuery extends QueryTemplate {
 		}
 		// If the right is not null => built it
 		if (rhs != null) {
-			rhs.Build(sb, args, this);
+			rhs.Build(sb, rhs.args, this);
 		}
 	}
 
@@ -178,7 +177,5 @@ public class SQLQuery extends QueryTemplate {
 		// TODO Auto-generated method stub
 		return this.getSQL();
 	}
-	
 
-	
 }
