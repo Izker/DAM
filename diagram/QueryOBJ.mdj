@@ -710,7 +710,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -720,7 +720,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+doTranslate(): String",
+											"text": "+doTranslate(Connection conn): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -739,7 +739,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -749,7 +749,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Mappingdata(Class clazz, ResutlSet rs): List<Object>",
+											"text": "+mappingData(Class clazz, ResutlSet rs): List<Object>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1099,7 +1099,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+doTranslate(): String",
+											"text": "+doTranslate(Connection conn): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1128,7 +1128,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Mappingdata(Class clazz, ResutlSet rs): List<Object>",
+											"text": "+mappingData(Class clazz, ResutlSet rs): List<Object>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1478,7 +1478,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+doTranslate(): String",
+											"text": "+doTranslate(Connection conn): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1507,7 +1507,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Mappingdata(Class clazz, ResutlSet rs): List<Object>",
+											"text": "+mappingData(Class clazz, ResutlSet rs): List<Object>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2259,7 +2259,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+doTranslate(): String",
+											"text": "+doTranslate(Connection conn): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2636,7 +2636,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Mappingdata(Class clazz, ResutlSet rs): List<Object>",
+											"text": "+mappingData(Class clazz, ResutlSet rs): List<Object>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3129,7 +3129,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+doTranslate(): String",
+											"text": "+doTranslate(Connection conn): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3158,7 +3158,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Mappingdata(Class clazz, ResutlSet rs): List<Object>",
+											"text": "+mappingData(Class clazz, ResutlSet rs): List<Object>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7422,11 +7422,27 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFdA/J5Mi5GwVg=",
+									"_parent": {
+										"$ref": "AAAAAAFcxJoGvzBjhgo="
+									},
+									"name": "Connection conn",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": false
+							"isAbstract": true
 						},
 						{
 							"_type": "UMLOperation",
@@ -7434,7 +7450,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFcqqk2CaPGmW4="
 							},
-							"name": "Mappingdata",
+							"name": "mappingData",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -7449,7 +7465,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -7480,7 +7495,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -7489,7 +7503,7 @@
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": false
+							"isAbstract": true
 						}
 					],
 					"isAbstract": false,
@@ -7616,6 +7630,22 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFdA/Ld3i5Mak8=",
+									"_parent": {
+										"$ref": "AAAAAAFcxHToeDAIVbg="
+									},
+									"name": "Connection conn",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -7628,7 +7658,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFcqrQqfKRVMFU="
 							},
-							"name": "Mappingdata",
+							"name": "mappingData",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -7643,7 +7673,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -7674,7 +7703,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -7761,6 +7789,22 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFdA/OGWy5Pwcw=",
+									"_parent": {
+										"$ref": "AAAAAAFcxHVzSDAWh2M="
+									},
+									"name": "Connection conn",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -7773,7 +7817,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFcqrj4ZKSRg3E="
 							},
-							"name": "Mappingdata",
+							"name": "mappingData",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -7788,7 +7832,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -7819,7 +7862,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -8626,6 +8668,22 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFdA/OjYS5S3SM=",
+									"_parent": {
+										"$ref": "AAAAAAFcxHWavjAknFM="
+									},
+									"name": "Connection conn",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -9184,7 +9242,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFcqs/0t7c99aI="
 							},
-							"name": "Mappingdata",
+							"name": "mappingData",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -9199,7 +9257,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -9230,7 +9287,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -9331,6 +9387,22 @@
 									"isOrdered": false,
 									"isUnique": false,
 									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFdA/Kr+C5JQf8=",
+									"_parent": {
+										"$ref": "AAAAAAFcxHXeCjAyT+U="
+									},
+									"name": "Connection conn",
+									"visibility": "public",
+									"isStatic": false,
+									"isLeaf": false,
+									"type": "",
+									"isReadOnly": false,
+									"isOrdered": false,
+									"isUnique": false,
+									"direction": "in"
 								}
 							],
 							"concurrency": "sequential",
@@ -9343,7 +9415,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFcquVcZ8RFEo8="
 							},
-							"name": "Mappingdata",
+							"name": "mappingData",
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
@@ -9358,7 +9430,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -9389,7 +9460,6 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
