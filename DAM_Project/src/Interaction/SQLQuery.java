@@ -11,7 +11,6 @@ import ConnectDB.*;
 //import java.lang.annotation.*;
 //import java.lang.reflect.*;
 import Helpers.ProcessParams;
-import querytemplate.SQLQuery;
 
 public class SQLQuery extends QueryTemplate {
 

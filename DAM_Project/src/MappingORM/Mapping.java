@@ -15,12 +15,12 @@ public class Mapping {
 		return true;
 	}
 
-	public boolean checkMapping(Object o, Session s) throws SQLException {
+	public boolean checkMapping(Class<?> c, Connection con) throws SQLException {
 		// Create connection
-		Connection conn = s.getConnection();
+		Connection conn = con;
 
 		// Get class frame from object
-		Class<?> clazz = o.getClass();
+		Class<?> clazz = c;
 
 		// Get annotation info of object's class (object o which is on
 		// parameter)
@@ -91,12 +91,12 @@ public class Mapping {
 				return false;
 			} else {
 				// check primarykey
-				if (primaryKey != primaryColumnName) {
+				if (primaryKey.equals(primaryColumnName) == false) {
 					return false;
 				} else {
 					// check column name of class and table
 					for (int i = 0; i < fields.length; i++) {
-						if (columnNames.get(i) != columnNamesDB.get(i)) {
+						if (columnNames.get(i).equals(columnNamesDB.get(i)) == false) {
 							return false;
 						}
 					}
