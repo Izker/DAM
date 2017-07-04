@@ -11,5 +11,12 @@
 	<classpathentry kind="lib" path="D:/workspace2/jar/commons-beanutils-1.9.3/commons-beanutils-1.9.3-sources.jar"/>
 	<classpathentry kind="lib" path="D:/workspace2/jar/commons-beanutils-1.9.3/commons-beanutils-1.9.3-tests.jar"/>
 	<classpathentry kind="lib" path="D:/workspace2/jar/commons-beanutils-1.9.3/commons-beanutils-1.9.3-test-sources.jar"/>
+	<classpathentry kind="lib" path="jar/commons-beanutils-1.9.3-javadoc.jar"/>
+	<classpathentry kind="lib" path="jar/commons-beanutils-1.9.3-sources.jar"/>
+	<classpathentry kind="lib" path="jar/commons-beanutils-1.9.3-test-sources.jar"/>
+	<classpathentry kind="lib" path="jar/commons-beanutils-1.9.3-tests.jar"/>
+	<classpathentry kind="lib" path="jar/commons-beanutils-1.9.3.jar"/>
+	<classpathentry kind="lib" path="jar/commons-logging-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="jar/commons-logging-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
