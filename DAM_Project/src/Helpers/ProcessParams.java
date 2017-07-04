@@ -21,6 +21,7 @@ public class ProcessParams {
 	private static String cRegex = "(?<!@)@\\w+.\\w+";
 	private static String tRegex = "(?<!@)@\\w+";
 	private static String numRegex = "(?<!@)@\\d+";
+	private static ArrayList<String> pLst = new ArrayList<String>();
 
 	public static String ProcessParamToSql(String input, ArrayList<Object> params) {
 		Pattern tPattern = Pattern.compile(numRegex);
@@ -40,7 +41,7 @@ public class ProcessParams {
 					System.out.println("IndexOutOfBoundsException");
 					break;
 				}
-				
+
 				Object obj = params.get(num);
 				// System.out.println(num);
 				// System.out.println(obj.toString());
@@ -78,14 +79,11 @@ public class ProcessParams {
 		while (m.find()) {
 			String c = m.group();
 			String className = c.substring(1);
-
-			try {
-				Class<?> clazz = Class.forName(className);
+			Class<?> clazz = GetClass(className);
+			if(clazz != null){			
 				Annotation tblAnno = clazz.getAnnotation(Table.class);
 				String tblName = ((Table) tblAnno).name();
 				input = input.replaceFirst(tRegex, tblName);
-			} catch (ClassNotFoundException e) {
-				System.err.println(e);
 			}
 		}
 		return input;
@@ -106,9 +104,8 @@ public class ProcessParams {
 			// System.out.println(m.start() + " " + m.end());
 			String className = c.substring(1, c.indexOf("."));
 			String propName = c.substring(c.indexOf(".") + 1, c.length());
-
-			try {
-				Class<?> clazz = Class.forName(className);
+			Class<?> clazz = GetClass(className);
+			if (clazz != null) {
 				Annotation tblAnno = clazz.getAnnotation(Table.class);
 				String tblName = ((Table) tblAnno).name();
 				String columnName = "";
@@ -137,10 +134,35 @@ public class ProcessParams {
 					}
 				}
 
-			} catch (ClassNotFoundException e) {
-				System.err.println(e);
 			}
 		}
 		return input;
+	}
+
+	private static ArrayList<String> GetAllPackages() {
+		ArrayList<String> output = new ArrayList<String>();
+		Package[] pLst = Package.getPackages();
+		for (Package p : pLst) {
+			output.add(p.getName());
+		}
+		return output;
+	}
+
+	private static Class<?> GetClass(String className) {
+		ClassNotFoundException e = new ClassNotFoundException();
+		if (pLst == null || pLst.isEmpty()) {
+			pLst = GetAllPackages();
+		}
+		for (String pa : pLst) {
+			try {
+				Class<?> clazz = Class.forName(pa + "." + className);
+				return clazz;
+			} catch (ClassNotFoundException e1) {
+				//System.err.println(e);
+				e = e1;
+			}
+		}
+		System.err.println(e);
+		return null;
 	}
 }
