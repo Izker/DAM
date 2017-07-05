@@ -1,5 +1,7 @@
 package Interaction;
-
+/*
+ * @author Chau Nguyen
+ */
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -20,9 +22,9 @@ public class SQLQuery extends QueryTemplate {
 	private String sql = null;
 	private String sqlFinal = null;
 	private ArrayList<Object> args = new ArrayList<Object>();
-	private ArrayList<Object> argsFinal = new ArrayList<Object>();
 	private SQLQuery rhs = null;
 
+	
 	@Override
 	public ArrayList mappingData(ResultSet rs, Class<?> clazz)
 			throws InstantiationException, IllegalAccessException, SQLException, InvocationTargetException {
@@ -93,19 +95,12 @@ public class SQLQuery extends QueryTemplate {
 		Build();
 		return sqlFinal;
 	}
-
+	
 	public void setSQL(String sqlFinal) {
 		this.sqlFinal = sqlFinal;
 	}
 
-	public ArrayList<Object> getArguments() {
-		Build();
-		return argsFinal;
-	}
-
-	public void setArguments(ArrayList<Object> argsFinal) {
-		this.argsFinal = argsFinal;
-	}
+	
 
 	// Constructor
 	public SQLQuery() {
@@ -169,7 +164,12 @@ public class SQLQuery extends QueryTemplate {
 			rhs.Build(sb, rhs.args, this);
 		}
 	}
-
+	
+	/*
+	 * @Description Check if SQL has sqlType
+	 * @param sql : SQL statement to check
+	 * @param sqlType: SQL statement type
+	 */
 	private boolean Is(SQLQuery sql, String sqlType) {
 		return (sqlType != null && sql != null && sql.sql != null && sql.sql.startsWith(sqlType));
 	}

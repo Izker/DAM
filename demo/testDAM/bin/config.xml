@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DBConfig id="t1">
-	<conString id="con1" name="DMA.connection.url">jdbc:sqlserver://localhost:54699;instance=SQLEXPRESS;databaseName=hibernate_data;integratedSecurity=True</conString>
-</DBConfig>
