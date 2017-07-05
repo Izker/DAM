@@ -1,12 +1,5 @@
 package ConnectDB;
 
-import java.io.File;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

@@ -1,6 +1,5 @@
 package Interaction;
 
-import java.beans.PropertyDescriptor;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
@@ -54,7 +53,7 @@ public class Delete extends QueryTemplate {
 	}
 
 	@Override
-	public ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz) {
+	public ArrayList mappingData(ResultSet rs, Class<?> clazz) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import Annotation.Table;
-import ConnectDB.Session;
 
 public class Insert extends QueryTemplate {
 
@@ -92,7 +91,7 @@ public class Insert extends QueryTemplate {
 	}
 
 	@Override
-	public ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz) {
+	public ArrayList mappingData(ResultSet rs, Class<?> clazz) {
 		// TODO Auto-generated method stub
 		System.out.println("Insert successfully");
 		return null;

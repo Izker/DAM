@@ -97,7 +97,7 @@ public class Update extends QueryTemplate {
 	}
 
 	@Override
-	public ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz) {
+	public ArrayList mappingData(ResultSet rs, Class<?> clazz) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -12,8 +12,8 @@ import MappingORM.*;
 
 public abstract class QueryTemplate {
 
-	public boolean executeQuery(Session s, Class<?> clazz, ArrayList<Class<?>> resList)
-			throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+	public boolean executeQuery(Session s, Class<?> clazz, ArrayList resList)
+			throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
 		Connection conn = s.getConnection();
 		Mapping checkMapping = new Mapping();
 		if (checkMapping.checkMapping(clazz, conn) == true) {
@@ -21,12 +21,14 @@ public abstract class QueryTemplate {
 			System.out.println(queryString);
 			Statement stmt = conn.createStatement();
 			ResultSet rs = null;
-			// rs = stmt.executeQuery(queryString);
+			//rs = stmt.executeQuery(queryString);
 			boolean res = stmt.execute(queryString);
 			rs = stmt.getResultSet();
 			if (rs != null) {
-
-				resList = mappingData(rs, clazz);
+				resList.clear();
+				resList.addAll(mappingData(rs, clazz));
+				//System.out.println("resList: "+ resList.size());
+				//System.out.println("resList item : "+ resList.get(0));
 			}
 
 			if (res == true) {
@@ -42,6 +44,6 @@ public abstract class QueryTemplate {
 	public abstract String doTranslate(Connection conn)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, SQLException;
 
-	public abstract ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz);
+	public abstract ArrayList mappingData(ResultSet rs, Class<?> clazz) throws InstantiationException, IllegalAccessException, SQLException, InvocationTargetException;
 
 }

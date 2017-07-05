@@ -1,15 +1,18 @@
 package Interaction;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import org.apache.commons.beanutils.BeanUtils;
 
-import ConnectDB.*;
-//import Annotation.*;
-//import java.lang.annotation.*;
-//import java.lang.reflect.*;
+import Annotation.Column;
+import Annotation.Primarykey;
+import Annotation.Table;
 import Helpers.ProcessParams;
 
 public class SQLQuery extends QueryTemplate {
@@ -21,9 +24,68 @@ public class SQLQuery extends QueryTemplate {
 	private SQLQuery rhs = null;
 
 	@Override
-	public ArrayList<Class<?>> mappingData(ResultSet rs, Class<?> clazz) {
+	public ArrayList mappingData(ResultSet rs, Class<?> clazz)
+			throws InstantiationException, IllegalAccessException, SQLException, InvocationTargetException {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList result = new ArrayList();
+
+		if (rs == null)
+			return null;
+		try {
+			while (rs.next()) {
+				Object obj = clazz.newInstance();
+				ResultSetMetaData rsmd = rs.getMetaData();
+
+				if (clazz.isAnnotationPresent(Table.class)) {
+					Field[] fields = clazz.getDeclaredFields();
+					for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+						String columnName = rsmd.getColumnName(i);
+						Object columnValue = rs.getObject(i);
+						// System.out.println("column " + i + " : " + columnName
+						// + "value: " + columnValue.toString());
+
+						for (Field f : fields) {
+							// Use Annotation to get columnName
+							String name = null;
+							Annotation[] anols = f.getAnnotations();
+							for (Annotation a : anols) {
+								if (a instanceof Column) {
+									if (((Column) a).name().equalsIgnoreCase(columnName)) {
+										BeanUtils.setProperty(obj, f.getName(), columnValue);
+										break;
+									}
+
+								}
+								if (a instanceof Primarykey) {
+									if (((Primarykey) a).primarykey().equalsIgnoreCase(columnName)) {
+										BeanUtils.setProperty(obj, f.getName(), columnValue);
+										break;
+									}
+								}
+							}
+						}
+
+					}
+				} else {
+					obj = rs;
+				}
+				result.add(obj);
+				// System.out.println(obj.getClass());
+				/*if (!result.isEmpty()) {
+					System.out.println("Item 0: "+result.get(0).toString());
+				}*/
+			}
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		//System.out.println("result: " + result.size());
+		return result;
 	}
 
 	// Getter and Setter
@@ -62,7 +124,7 @@ public class SQLQuery extends QueryTemplate {
 		if (_args != null) {
 			for (Object obj : _args) {
 				this.args.add(obj);
-			}			
+			}
 		}
 	}
 
@@ -170,8 +232,8 @@ public class SQLQuery extends QueryTemplate {
 		_sql = "WHERE " + _sql;
 		return this.append(new SQLQuery(_sql, args));
 	}
-	
-	public SQLQuery OrderBy(Object... columns){
+
+	public SQLQuery OrderBy(Object... columns) {
 		String _sql = "ORDER BY ";
 		for (Object c : columns) {
 			_sql += c.toString();
@@ -182,8 +244,8 @@ public class SQLQuery extends QueryTemplate {
 		}
 		return this.append(new SQLQuery(_sql, null));
 	}
-	
-	public SQLQuery GroupBy(Object... columns){
+
+	public SQLQuery GroupBy(Object... columns) {
 		String _sql = "GROUP BY ";
 		for (Object c : columns) {
 			_sql += c.toString();
